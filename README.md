@@ -2,6 +2,11 @@
 
 SPA de gestión de higiene urbana desarrollada como desafío técnico para Urbetrack. Es un centro de operaciones donde un operador municipal monitorea el estado del mobiliario urbano (papeleras, contenedores, bancos), hace seguimiento de incidentes reportados en la vía pública, y administra la flota de vehículos asignada a cada zona de la ciudad.
 
+## Vista previa
+
+<img width="1917" height="967" alt="Captura de pantalla 2026-07-02 174251" src="https://github.com/user-attachments/assets/b4032453-2634-4bb8-9918-9636e0bf84b8" />
+
+
 ## Stack
 
 - **React 19 + TypeScript + Vite** — requisitos excluyentes del desafío.
@@ -120,3 +125,4 @@ src/
 
 Los componentes reutilizables se concentran en `components/ui`, mientras que la infraestructura compartida (`lib`, `store` y `types`) permanece desacoplada de las features para favorecer la reutilización y el mantenimiento. Esta organización permite que cada módulo evolucione de forma independiente, manteniendo una separación clara entre la lógica de negocio, la presentación y los servicios compartidos.
 
+                                                          ❤️ Hecho con amor by Andrés Vallarino.
