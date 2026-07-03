@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { PageHeader } from '@/components/layout/PageHeader'
 import { Select } from '@/components/ui/Select'
+import { ViewToggle, type ViewMode } from '@/components/ui/ViewToggle'
 import { useAssets } from '../hooks'
 import { useZones } from '@/features/zones/hooks'
 import { useZoneFilterStore } from '@/store/useZoneFilterStore'
@@ -8,6 +9,7 @@ import { assetStatuses, assetTypes, type AssetStatus, type AssetType } from '@/t
 import { CreateAssetDialog } from './CreateAssetDialog'
 import { AssetsTable } from './AssetsTable'
 import { Pagination } from '@/components/ui/Pagination'
+import { AssetsMap } from '@/components/map/AssetsMap'
 
 const ALL = '__all__'
 
@@ -23,6 +25,7 @@ export function AssetsPage() {
   const [status, setStatus] = useState<string>(ALL)
   const [type, setType] = useState<string>(ALL)
   const [page, setPage] = useState(1)
+  const [view, setView] = useState<ViewMode>('table')
   const activeZoneId = useZoneFilterStore((s) => s.activeZoneId)
   const { data: zones = [] } = useZones()
 
@@ -64,18 +67,27 @@ export function AssetsPage() {
       />
 
       <div className="flex flex-wrap gap-3">
-        <Select
-          value={type}
-          onValueChange={setType}
-          aria-label="Filtrar por tipo"
-          options={[{ value: ALL, label: 'Todos los tipos' }, ...assetTypes.map((t) => ({ value: t, label: typeLabels[t] }))]}
-        />
+        {view === 'table' && (
+          <Select
+            value={type}
+            onValueChange={setType}
+            aria-label="Filtrar por tipo"
+            options={[
+              { value: ALL, label: 'Todos los tipos' },
+              ...assetTypes.map((t) => ({
+                value: t,
+                label: typeLabels[t],
+              })),
+            ]}
+          />
+        )}
         <Select
           value={status}
           onValueChange={setStatus}
           aria-label="Filtrar por estado"
           options={[{ value: ALL, label: 'Todos los estados' }, ...assetStatuses.map((s) => ({ value: s, label: statusLabels[s] }))]}
         />
+        <ViewToggle value={view} onChange={setView} />
       </div>
 
       {isLoading ? (
@@ -84,7 +96,7 @@ export function AssetsPage() {
         <p className="text-sm text-alert-500">
           No pudimos cargar los assets. Verificá que el backend esté corriendo en localhost:3000.
         </p>
-      ) : (
+      ) : view === 'table' ? (
         <>
           <Pagination
             page={page}
@@ -95,6 +107,9 @@ export function AssetsPage() {
           <AssetsTable assets={paginatedAssets} zoneNameById={zoneNameById} />
 
         </>
+      ) : (
+        <AssetsMap assets={scopedAssets} zoneNameById={zoneNameById} />
+
       )}
     </div>
   )

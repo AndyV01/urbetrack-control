@@ -55,7 +55,7 @@ pnpm preview
 ## Funcionalidades
 
 - Dashboard con métricas generales por ciudad o zona.
-- Listado de Assets con filtros por tipo y estado.
+- Listado de Assets con filtros por tipo y estado, con vista en tabla o mapa.
 - Alta de Assets.
 - Listado de Incidentes con filtros por tipo, estado y zona.
 - Alta de Incidentes.
@@ -125,4 +125,4 @@ src/
 
 Los componentes reutilizables se concentran en `components/ui`, mientras que la infraestructura compartida (`lib`, `store` y `types`) permanece desacoplada de las features para favorecer la reutilización y el mantenimiento. Esta organización permite que cada módulo evolucione de forma independiente, manteniendo una separación clara entre la lógica de negocio, la presentación y los servicios compartidos.
 
-                                                          ❤️ Hecho con amor by Andrés Vallarino.
+ ❤️ Hecho con amor by Andrés Vallarino.
